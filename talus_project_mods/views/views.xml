@@ -1,0 +1,20 @@
+<odoo>
+  <data>
+
+    <!-- Project Task form view  -->
+    <record model="ir.ui.view" id="talus_project_task_mods">
+      <field name="name">talus.project.task</field>
+      <field name="inherit_id" ref="project.view_task_form2"/>
+      <field name="model">project.task</field>
+      <field name="arch" type="xml">
+        <xpath expr="//page[@name='extra_info']" position="after">
+          <page string="Internal Notes">
+              <field name="internal_notes" type="html"/>
+              <div class="oe_clear"/>
+          </page>
+        </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>
