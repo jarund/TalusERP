@@ -1,0 +1,227 @@
+<odoo>
+  <data>
+
+
+    <!-- App list view -->
+    <!-- Custom Module List -->
+    <record model="ir.ui.view" id="talus_cust_app_list.app_list_view">
+      <field name="name">Custom App List</field>
+      <field name="model">talus_cust_app_list.custom_app_list</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="app_name"/>
+          <field name="short_descr"/>
+          <field name="owner_id"/>
+          <field name="stage_id"/>
+          <field name="related_app" widget="many2many_tags"/>
+          <field name="app_creator"/>
+        </tree>
+      </field>
+    </record>
+    
+    <!-- Custom DB Code -->
+    <record model="ir.ui.view" id="talus_cust_app_list.cust_dbcode_list_view">
+      <field name="name">Custom DB Code List</field>
+      <field name="model">talus_cust_db_code</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="app_name"/>
+          <field name="short_descr"/>
+          <field name="owner_id"/>
+          <!-- <field name="stage_id"/> -->
+          <field name="related_app" widget="many2many_tags"/>
+          <field name="app_creator"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- Custom App form view.  -->
+    <record model="ir.ui.view" id="talus_cust_app_list.app_list_form">
+      <field name="name">Custom App</field>
+      <field name="model">talus_cust_app_list.custom_app_list</field>
+      <field name="arch" type="xml">
+        <form string="Custom App">
+          <header>
+            <field name="stage_id" widget="statusbar" options="{'clickable': '1'}"/>
+          </header>
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                <field name="app_name" placeholder="e.g. talus_cust_app_list" help="Enter app name here."/>
+              </h1>
+            </div>
+          <group col='2'>
+            <group>
+              <field name="short_descr"/>
+              <field name="owner_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer'}"/>
+              <field name="app_creator" widget="res_partner_many2one" context="{'res_partner_search_mode': 'supplier'}"/>
+              <!-- <field name="stage_id"/> -->
+            </group>
+            <group>
+              <field name="install_date"/>
+              <field name="update_date"/>
+              <field name="related_app" widget="many2many_tags"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="App Notes" name="app_notes">
+                <field name="app_notes"/>
+            </page>
+            <page string="Key Code" name="key_code">
+                <field name="key_code"/>
+            </page>
+          </notebook>
+          </sheet>
+        <div class="oe_chatter">
+         <field name="message_follower_ids" widget="mail_followers"/>
+         <field name="message_ids" widget="mail_thread"/>
+        </div>
+        </form>
+      </field>
+    </record>
+
+    <!-- Custom DB Code form view -->
+    <record model="ir.ui.view" id="talus_cust_db_code_form">
+      <field name="name">Custom DB Code</field>
+      <field name="model">talus_cust_db_code</field>
+      <field name="arch" type="xml">
+        <form string="Custom App">
+          <header>
+            <field name="stage_id" widget="statusbar" options="{'clickable': '1'}"/>
+          </header>
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                <field name="app_name" placeholder="e.g. talus_cust_app_list" help="Enter app name here."/>
+              </h1>
+            </div>
+          <group col='2'>
+            <group>
+              <field name="short_descr"/>
+              <field name="owner_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer'}"/>
+              <field name="app_creator" widget="res_partner_many2one" context="{'res_partner_search_mode': 'supplier'}"/>
+              <!-- <field name="stage_id"/> -->
+            </group>
+            <group>
+              <field name="install_date"/>
+              <field name="update_date"/>
+              <field name="related_app" widget="many2many_tags"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="App Notes" name="app_notes">
+                <field name="app_notes"/>
+            </page>
+            <page string="Key Code" name="key_code">
+                <field name="key_code"/>
+            </page>
+          </notebook>
+          </sheet>
+        <div class="oe_chatter">
+         <field name="message_follower_ids" widget="mail_followers"/>
+         <field name="message_ids" widget="mail_thread"/>
+        </div>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- Customer form view.  -->
+    <!-- Seems to not like a "." in the id -->
+    <record model="ir.ui.view" id="talus_customer_form">
+      <field name="name">Customer</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="model">res.partner</field>
+      <!-- Adding Odoo url for Customer in Header area -->
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='vat']" position="before">
+          <field name="odoo_url" widget="url"/>
+        </xpath>
+        <!-- Adding M code on sales and purchasing tab -->
+        <xpath expr="//field[@name='property_supplier_payment_term_id']" position="after">
+          <field name="m_code"/>
+        </xpath>
+        <!-- Adding tab to show custom modules for customer -->
+        <xpath expr="//page[@name='sales_purchases']" position="after">
+          <page string="Custom Modules">
+            <field name="cust_app_ids" context="{'default_owner_id': active_id}">
+              <tree>
+                <field name="app_name"/>
+                <field name="short_descr"/>
+                <field name="stage_id"/>
+                <field name="install_date"/>
+                <field name="update_date"/>
+              </tree>
+            </field>
+          </page>
+        </xpath>
+        <!-- Adding tab to show custom db code for customer -->
+        <xpath expr="//page[@name='sales_purchases']" position="after">
+          <page string="Custom DB Code">
+            <field name="cust_dbcode_ids" context="{'default_owner_id': active_id}">
+              <tree>
+                <field name="app_name"/>
+                <field name="short_descr"/>
+                <field name="stage_id"/>
+                <field name="install_date"/>
+                <field name="update_date"/>
+              </tree>
+            </field>
+          </page>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- Custom Code Stage List -->
+    <record model="ir.ui.view" id="talus_cust_app_list.custom_code_stage_list">
+      <field name="name">Custom Code Stage List</field>
+      <field name="model">talus_custom_stage_list</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="sequence"  widget="handle"/>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+
+
+
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="talus_cust_app_list.action_custom_code_list">
+      <field name="name">Custom Module List</field>
+      <field name="res_model">talus_cust_app_list.custom_app_list</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu action for Custom DB Code -->
+    <record model="ir.actions.act_window" id="talus_cust_app_list.action_dbcode_list">
+      <field name="name">Custom DB Code List</field>
+      <field name="res_model">talus_cust_db_code</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu action for Custom Code Stages -->
+    <record model="ir.actions.act_window" id="talus_cust_app_list.action_custom_code_stages">
+      <field name="name">Custom Code Stages</field>
+      <field name="res_model">talus_custom_stage_list</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+      <!-- Top menu item -->
+    <menuitem name="Custom Code" id="talus_cust_app_list.menu_root"/>
+
+    <!-- menu categories -->
+    <menuitem name="Custom Modules" id="talus_cust_app_list.custom_code_list" parent="talus_cust_app_list.menu_root"/>
+    <menuitem name="Custom DB Code" id="talus_cust_app_list.dbcode_list" parent="talus_cust_app_list.menu_root"/>
+    <menuitem name="Configuration" id="talus_cust_app_list.configuration_menu" parent="talus_cust_app_list.menu_root"/>
+    <!-- menu Configuration -->    
+    <menuitem name="Custom Module List" id="talus_cust_app_list.custom_module_menu" sequence="30" parent="talus_cust_app_list.custom_code_list" action="talus_cust_app_list.action_custom_code_list"/>
+        <!-- <menuitem name="App List" id="talus_cust_app_list.app_list_menu" parent="talus_cust_app_list.configuration_menu" action="talus_cust_app_list.action_app_list"/> -->
+    <menuitem name="Custom DB Code List" id="talus_cust_app_list.custom_code_menu" sequence="50" parent="talus_cust_app_list.dbcode_list" action="talus_cust_app_list.action_dbcode_list"/>
+        <!-- <menuitem name="DB Code App List" id="talus_cust_db_code.app_list_menu" parent="alus_cust_db_code.Custom_code_menu" action="talus_cust_db_code.action_app_list"/> -->
+    <menuitem name="Custom Code Stages" id="talus_cust_app_list.custom_code_stages" sequence="90" parent="talus_cust_app_list.configuration_menu" action="talus_cust_app_list.action_custom_code_stages"/>
+  </data>
+</odoo>
