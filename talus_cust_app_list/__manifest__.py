@@ -6,7 +6,7 @@
         Hold a list of app installed per Customer""",
 
     'description': """
-        Hold a list of app installed per Customer
+        Hold a list of Modules installed per Customer and DB Code added per customer.  Useful for upgrading.
     """,
 
     'author': "Talus ERP",
