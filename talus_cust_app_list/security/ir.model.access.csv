@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_talus_app_list,access_talus_app_list,model_talus_app_list,base.group_user,1,1,1,1
+access_talus_cust_app_list_custom_app_list,access_talus_cust_app_list_custom_app_list,model_talus_cust_app_list_custom_app_list,base.group_user,1,1,1,1
+access_talus_custom_stage_list,access_talus_custom_stage_list,model_talus_custom_stage_list,base.group_user,1,1,1,1
+access_talus_cust_db_code,access_talus_cust_db_code,model_talus_cust_db_code,base.group_user,1,1,1,1
