@@ -170,9 +170,23 @@
             </field>
           </page>
         </xpath>
-
       </field>
     </record>
+
+    <!-- Custom Code Stage List -->
+    <record model="ir.ui.view" id="talus_cust_app_list.custom_code_stage_list">
+      <field name="name">Custom Code Stage List</field>
+      <field name="model">talus_custom_stage_list</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="sequence"  widget="handle"/>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+
+
 
 
     <!-- actions opening views on models -->
@@ -189,16 +203,25 @@
       <field name="view_mode">tree,form</field>
     </record>
 
+    <!-- Menu action for Custom Code Stages -->
+    <record model="ir.actions.act_window" id="talus_cust_app_list.action_custom_code_stages">
+      <field name="name">Custom Code Stages</field>
+      <field name="res_model">talus_custom_stage_list</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
       <!-- Top menu item -->
     <menuitem name="Custom Code" id="talus_cust_app_list.menu_root"/>
 
     <!-- menu categories -->
     <menuitem name="Custom Modules" id="talus_cust_app_list.custom_code_list" parent="talus_cust_app_list.menu_root"/>
     <menuitem name="Custom DB Code" id="talus_cust_app_list.dbcode_list" parent="talus_cust_app_list.menu_root"/>
+    <menuitem name="Configuration" id="talus_cust_app_list.configuration_menu" parent="talus_cust_app_list.menu_root"/>
     <!-- menu Configuration -->    
     <menuitem name="Custom Module List" id="talus_cust_app_list.custom_module_menu" sequence="30" parent="talus_cust_app_list.custom_code_list" action="talus_cust_app_list.action_custom_code_list"/>
         <!-- <menuitem name="App List" id="talus_cust_app_list.app_list_menu" parent="talus_cust_app_list.configuration_menu" action="talus_cust_app_list.action_app_list"/> -->
     <menuitem name="Custom DB Code List" id="talus_cust_app_list.custom_code_menu" sequence="50" parent="talus_cust_app_list.dbcode_list" action="talus_cust_app_list.action_dbcode_list"/>
         <!-- <menuitem name="DB Code App List" id="talus_cust_db_code.app_list_menu" parent="alus_cust_db_code.Custom_code_menu" action="talus_cust_db_code.action_app_list"/> -->
+    <menuitem name="Custom Code Stages" id="talus_cust_app_list.custom_code_stages" sequence="90" parent="talus_cust_app_list.configuration_menu" action="talus_cust_app_list.action_custom_code_stages"/>
   </data>
 </odoo>
