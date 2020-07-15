@@ -1,0 +1,21 @@
+<odoo>
+  <data>
+
+    <!-- Helpdesk ticker form view  -->
+    <record model="ir.ui.view" id="talus_helpdesk_mods">
+      <field name="name">talus.helpdesk.mods</field>
+      <field name="inherit_id" ref="helpdesk_timesheet.helpdesk_ticket_view_form_inherit_helpdesk_timesheet"/>
+      <field name="model">helpdesk.ticket</field>
+      <field name="arch" type="xml">
+        <!-- <xpath expr="//field[@name='description']" position="after"> -->
+        <xpath expr="//page[2]" position="after">
+          <page string="Internal Notes">
+              <field name="internal_notes" type="html"/>
+              <div class="oe_clear"/>
+          </page>
+        </xpath>
+      </field>
+    </record> 
+
+  </data>
+</odoo>

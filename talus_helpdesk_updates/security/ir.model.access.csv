@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_talus_helpdesk_updates_talus_helpdesk_updates,talus_helpdesk_updates.talus_helpdesk_updates,model_talus_helpdesk_updates_talus_helpdesk_updates,base.group_user,1,1,1,1
