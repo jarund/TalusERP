@@ -6,7 +6,7 @@
         Helpdesk Updates""",
 
     'description': """
-        Helpdesk updates, changing description to html, adding Internal notes tab.
+        Helpdesk updates, changing description to html, adding Internal notes tab in html format.
     """,
 
     'author': "Talus ERP",
