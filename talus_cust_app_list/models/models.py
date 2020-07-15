@@ -19,7 +19,7 @@ class talus_cust_app_list(models.Model):
     related_app = fields.Many2many('talus_app_list', string="Related Apps")
     app_notes = fields.Html(string='App Notes')
     key_code = fields.Html(string='Key Code')
-    stage_id = fields.Many2one("talus_custom_stage_list")
+    stage_id = fields.Many2one("talus_custom_stage_list", required=True)
 
 class app_list(models.Model):
     _name = 'talus_app_list'
@@ -30,7 +30,9 @@ class app_list(models.Model):
 class custom_stage_list(models.Model):
     _name = 'talus_custom_stage_list'
     _description = 'Custom App Stages'
+    _order = 'sequence'
     name = fields.Char("Stages")
+    sequence = fields.Integer("Sequence")
 
 # Recording DB customizations
 class cust_db_code(models.Model):
